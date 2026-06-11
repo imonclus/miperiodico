@@ -1,0 +1,52 @@
+name: Actualizar Periódico RSS
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Se ejecutará cada 6 horas automáticamente
+  workflow_dispatch:      # Añade un botón en GitHub para ejecutarlo manualmente cuando quieras
+
+# Permisos necesarios para publicar en GitHub Pages de forma segura
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# No permitir múltiples despliegues concurrentes
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Descargar el código
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 📦 Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: 🗞️ Descargar noticias y generar HTML
+        run: python rss_main.py
+
+      - name: ⚙️ Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Subir artefacto para Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Aquí indicamos la carpeta donde tu script guarda el index.html
+          path: 'public'
+
+      - name: 🚀 Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

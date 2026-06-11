@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Periódico Digital - RSS</title>
+    <style>
+        :root {
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --primary: #2563eb;
+            --border: #e5e7eb;
+        }
+        /* Soporte para modo oscuro automático */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #111827;
+                --text-color: #f9fafb;
+                --card-bg: #1f2937;
+                --primary: #3b82f6;
+                --border: #374151;
+            }
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: -1px;
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+        .filter-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            padding-bottom: 4rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: var(--border);
+        }
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .source {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .title {
+            margin: 0 0 1rem 0;
+            font-size: 1.25rem;
+            line-height: 1.3;
+        }
+        .title a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        .title a:hover {
+            text-decoration: underline;
+        }
+        .summary {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        .footer {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🗞️ Tu Periódico Personal</h1>
+        <p>Actualizado el: 11/06/2026 20:58</p>
+    </header>
+    
+    <nav class="filters">
+        <button class="filter-btn active" onclick="filterSource('all', this)">Todas las noticias</button>
+        
+        <button class="filter-btn" onclick="filterSource('BBC Mundo', this)">BBC Mundo</button>
+        
+        <button class="filter-btn" onclick="filterSource('EL PAÍS: el periódico global', this)">EL PAÍS: el periódico global</button>
+        
+        <button class="filter-btn" onclick="filterSource('Portada de Tecnología | EL PAÍS', this)">Portada de Tecnología | EL PAÍS</button>
+        
+    </nav>
+
+    <div class="container">
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://imagenes.elpais.com/resizer/v2/UU7QMB6KPJCVFFVHWBVWAPS6SI.jpg?auth=ca0be4a2644b028e39c40a8a0440362e228a2f1620d315ccbcc72ccb63209577" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/deportes/mundial-futbol/2026-06-05/todas-las-selecciones-del-mundial-de-estados-unidos-canada-y-mexico.html" target="_blank">Todas las selecciones del Mundial 2026 en Estados Unidos, Canadá y México</a></h2>
+                <div class="summary">La competición con más equipos de la historia pone en juego a 48 combinados nacionales durante cinco semanas. Consulte aquí todos los detalles</div>
+                <div class="footer">05/06/2026 17:08</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://imagenes.elpais.com/resizer/v2/4TOIXKV43FHE5MGG7ZRZBUR5XA.jpg?auth=3406318182b282b9483095fd5ad65872e1e30e9c6da782358e533e530698d395" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/espana/2026-06-11/la-tasacion-de-las-joyas-incautadas-a-zapatero-cifra-su-valor-en-unos-13-millones-de-euros.html" target="_blank">La tasación de las joyas incautadas a Zapatero cifra su valor en unos 1,3 millones de euros</a></h2>
+                <div class="summary">La valoración la ha llevado a cabo la joyería Ansorena, con la participación del Instituto Gemológico Español, por orden del juez Calama</div>
+                <div class="footer">11/06/2026 19:16</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://imagenes.elpais.com/resizer/v2/GW5MNXY7MND7ROZ6NEFYJPVYEY.jpg?auth=fe5562548b9b928e81cc3a80900656d4ce12b0d0790b0bd82bcbaf75d7769996" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/internacional/2026-06-11/ultima-hora-de-la-guerra-de-estados-unidos-e-israel-contra-iran-en-directo.html" target="_blank">Última hora de la guerra de Estados Unidos e Israel contra Irán, en directo | Irán desmiente a Trump y asegura que no ha aprobado ningún acuerdo con EE UU</a></h2>
+                <div class="summary">Trump suspende los ataques tras asegurar que se han aprobado “los puntos finales” del acuerdo | Teherán denuncia que los últimos ataques de Washington dejan “sin efecto en la práctica” el alto el fuego</div>
+                <div class="footer">11/06/2026 19:56</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://imagenes.elpais.com/resizer/v2/SBF3AFL4BVARNCCJ2JRVRQ2QRA.JPG?auth=796bbbf4ac354e0f50a5e4d306ac649905c378bb139ed23a5b01ed2bcf616299" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/mexico/2026-06-11/mexico-sudafrica-la-inauguracion-del-mundial-2026-en-vivo.html" target="_blank">México - Sudáfrica, en vivo | Las selecciones calientan en el Azteca en la previa del partido inaugural</a></h2>
+                <div class="summary">México vuelve a ser anfitrión 40 años después y se convierte así en el único país en albergar tres veces un Mundial, organizado este año junto a EE UU y Canadá. Shakira, Maná y Los Ángeles Azules destacaron en la ceremonia de inauguración. Las movilizaciones sociales marcaron la jornada antes del arranque del juego</div>
+                <div class="footer">11/06/2026 19:55</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/deportes/mundial-futbol/2026-06-11/quien-ganara-el-mundial-asi-arrancan-nuestras-predicciones.html" target="_blank">¿Quién ganará el Mundial? Así arrancan nuestras predicciones</a></h2>
+                <div class="summary">El modelo estadístico de EL PAÍS dice que España es la favorita. Pero cuidado: solo gana una de cada seis veces. Consulte las opciones actualizadas de cada selección</div>
+                <div class="footer">11/06/2026 04:40</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://imagenes.elpais.com/resizer/v2/6S6N64J6WNMVDKSXOGKGGRAY4Y.jpg?auth=29b033c963d7d0bfb6b1bb7c9b0f5f3a04dcad9ee2b1efe55979b34951757571" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/mexico/2026-06-11/la-ceremonia-de-inauguracion-de-la-copa-del-mundo-2026-en-imagenes.html" target="_blank">La ceremonia de inauguración de la Copa del Mundo 2026, en imágenes</a></h2>
+                <div class="summary">La 23ª edición de la Copa Mundial marca un hito histórico al ser el primer torneo organizado conjuntamente por tres países: México, Estados Unidos y Canadá. Es el primer mundial con formato de 48 selecciones participantes y se disputarán un total de 104 partidos</div>
+                <div class="footer">11/06/2026 19:03</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://imagenes.elpais.com/resizer/v2/BTKV3Z2IWVE6FM4GZAQ4OS4JCE.jpg?auth=183bf59475aeb22ea583a94efcf6424d4b75bb2d3564ab9f8399026159efb036" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/deportes/futbol/2026-06-11/el-real-madrid-ha-oficial-el-fichaje-de-jose-mourinho-para-el-banquillo.html" target="_blank">El Real Madrid hace oficial el fichaje de José Mourinho para el banquillo</a></h2>
+                <div class="summary">El técnico portugués, que regresa a la entidad blanca tras su primera etapa entre 2010 y 2013, firma por tres temporadas</div>
+                <div class="footer">11/06/2026 19:19</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://vdmedia.elpais.com/mcv/elpais/multimedia/20260611/1182360_120814_video_1800.mp4" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/espana/2026-06-11/el-papa-en-el-muelle-de-los-cayucos-de-arguineguin-no-podemos-acostumbrarnos-a-contar-muertos-la-dignidad-humana-no-tiene-pasaporte.html" target="_blank">El Papa, en el muelle de los cayucos de Arguineguín: “No podemos acostumbrarnos a contar muertos. La dignidad humana no tiene pasaporte”</a></h2>
+                <div class="summary">León XIV hace en Canarias y ante Pedro Sánchez un duro discurso contra la discriminación de migrantes y a favor de la acogida: “Cada vida que llega nos pregunta qué queda de nuestra humanidad”</div>
+                <div class="footer">11/06/2026 12:40</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://vdmedia.elpais.com/mcv/elpais/multimedia/20260611/1182397_133802_video_1800.mp4" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/espana/2026-06-11/para-que-sirve-la-visita-de-un-papa-robert-prevost-insufla-la-solidaridad-de-los-canarios-con-la-migracion.html" target="_blank">¿Para qué sirve la visita de un papa? Robert Prevost impulsa la solidaridad de los canarios con la migración</a></h2>
+                <div class="summary">El muelle de Arguineguín reúne bajo el manto del Pontífice a las organizaciones civiles y religiosas que luchan por los derechos humanos</div>
+                <div class="footer">11/06/2026 17:51</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://imagenes.elpais.com/resizer/v2/OZFZXTEOSBETVB5CSQAPWKAUCE.jpg?auth=b239847d956c55253737b5e58c068772b30c3a6793bc58300238e5890018cb61" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/sociedad/2026-06-11/condenado-un-informatico-a-57-anos-por-robar-fotos-intimas-a-14-personas-mientras-les-arreglaba-el-ordenador.html" target="_blank">Condenado un informático a 57 años por robar fotos íntimas a 14 personas mientras les arreglaba el ordenador</a></h2>
+                <div class="summary">“La sentencia es ejemplar, pero se ha tardado mucho”, lamenta una de las víctimas tras una década de espera. La Guardia Civil encontró 314 carpetas de clientes a los que grabó sin su conocimiento o les quitó material privado</div>
+                <div class="footer">11/06/2026 15:00</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://vdmedia.elpais.com/mcv/elpais/multimedia/20260611/1182453_154226_video_1800.mp4" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/economia/2026-06-11/el-bce-sube-los-tipos-por-primera-vez-en-casi-tres-anos-para-atajar-la-inflacion.html" target="_blank">El BCE sube los tipos por primera vez en casi tres años y empeora sus previsiones de inflación</a></h2>
+                <div class="summary">El incremento de 0,25 puntos sitúa el precio del dinero en el 2,25%. El encarecimiento del barril de petróleo por la guerra en Irán ha sacado al Eurobanco de su letargo, y los mercados no descartan otro incremento este mismo año</div>
+                <div class="footer">11/06/2026 13:15</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
+            <img src="https://imagenes.elpais.com/resizer/v2/FEVTLPARVFGT5A3Z4YMT252BU4.JPG?auth=50e2b06a7d6b18291aa7f0d1bbaf8d48d3743d18938809bd217f5abe0b8d4752" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/espana/2026-06-11/el-juez-autoriza-a-la-uco-a-rastrear-las-cuentas-del-novio-de-ayuso-desde-2014.html" target="_blank">El juez autoriza a la UCO a rastrear las cuentas del novio de Ayuso desde 2014</a></h2>
+                <div class="summary">El magistrado Antonio Viejo acuerda esta diligencia seis meses después de que así lo reclamara la Guardia Civil</div>
+                <div class="footer">11/06/2026 12:10</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2021/01/22/talento/1611341248_370001_1611343050_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2021/01/22/talento/1611341248_370001.html#?ref=rss&format=simple&link=link" target="_blank">Las reuniones por videollamada perpetúan las dificultades de las mujeres para ser escuchadas</a></h2>
+                <div class="summary">Un estudio realizado entre directivas señala que al 45% les resulta más difícil hablar durante los encuentros virtuales. Una de cada cinco se sintió directamente ignorada</div>
+                <div class="footer">22/01/2021 21:38</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/12/17/innovacion/1608212995_220652_1608213336_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/12/17/innovacion/1608212995_220652.html#?ref=rss&format=simple&link=link" target="_blank">Ocho propuestas tecnológicas para enriquecer la mirada del fotógrafo</a></h2>
+                <div class="summary">Una nueva generación de cámaras con ‘zoom’ ultrapotente reconcilia al ojo con su función de ver y observar</div>
+                <div class="footer">19/12/2020 17:12</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2021/01/20/innovacion/1611107359_745257_1611111105_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2021/01/20/innovacion/1611107359_745257.html#?ref=rss&format=simple&link=link" target="_blank">‘Lifelogging’, la realidad de la que todos (también usted) formamos parte</a></h2>
+                <div class="summary">Cuando nos exponemos diariamente a las redes, nuestra privacidad peligra. El rastro digital que dejamos con nuestra actividad cotidiana lo dice casi todo de nostros.</div>
+                <div class="footer">23/01/2021 18:15</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/12/18/tendencias/1608306962_883235_1608307185_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/12/18/tendencias/1608306962_883235.html#?ref=rss&format=simple&link=link" target="_blank">GIMP: el ‘Photoshop del pueblo’ cumple 25 años (contra todo pronóstico)</a></h2>
+                <div class="summary">Un programa de edición de gráficos gratuito y sin vocación de permanencia nacido en 1995 se ha mantenido vivo gracias al empuje de una comunidad de colaboradores voluntarios</div>
+                <div class="footer">18/12/2020 18:19</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/11/27/talento/1606484799_921538_1606499147_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/11/27/talento/1606484799_921538.html#?ref=rss&format=simple&link=link" target="_blank">“La privacidad es colectiva, como el medioambiente. Si no cuidas tus datos, otros sufren las consecuencias”</a></h2>
+                <div class="summary">La filósofa Carissa Véliz defiende que la regulación de las grandes tecnológicas está cada día más cerca. La economía de datos, que ha dado lugar a los ‘data brokers’ o la publicidad personalizada, debe, según ella, prohibirse si queremos preservar la democracia.</div>
+                <div class="footer">28/11/2020 07:45</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/11/27/tendencias/1606482531_845037_1606482783_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/11/27/tendencias/1606482531_845037.html#?ref=rss&format=simple&link=link" target="_blank">Los videojuegos se hacen mayores y desbordan las pantallas</a></h2>
+                <div class="summary">Son la primera industria cultural por volumen de facturación. Su uso en la medicina o la ‘gamificación’ laboral y social y el desarrollo de sectores como el deporte electrónico y el ‘streaming’ reflejan la gran implantación de lo que en su día fueron unos simples píxeles en movimiento</div>
+                <div class="footer">29/11/2020 20:55</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/07/17/innovacion/1594969056_358038_1594969323_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/07/17/innovacion/1594969056_358038.html#?ref=rss&format=simple&link=link" target="_blank">Parler, la red social de moda de la ultraderecha estadounidense</a></h2>
+                <div class="summary">Convertida en alternativa a Twitter tras el cambio en sus políticas con respecto a los discursos de odio, la plataforma gana adeptos entre los más conservadores al prometer libertad absoluta</div>
+                <div class="footer">18/07/2020 20:12</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/07/17/innovacion/1594971870_689549_1594972010_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/07/17/innovacion/1594971870_689549.html#?ref=rss&format=simple&link=link" target="_blank">Calles de hidrógeno: una ciudad para crear el combustible del futuro</a></h2>
+                <div class="summary">Toyota conectará con sensores y datos a personas, edificios y vehículos en la ciudad inteligente de Woven City</div>
+                <div class="footer">18/07/2020 20:11</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/06/20/tendencias/1592660717_029333_1592660841_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/06/20/tendencias/1592660717_029333.html#?ref=rss&format=simple&link=link" target="_blank">TikTok publica cómo funciona su sistema de recomendación de contenido</a></h2>
+                <div class="summary">La compañía asegura que ni el número de seguidores ni las visitas de los vídeos se consideran factores decisivos para recomendarlos a otros usuarios</div>
+                <div class="footer">20/06/2020 17:26</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/05/22/innovacion/1590166284_948911_1590166868_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/05/22/innovacion/1590166284_948911.html#?ref=rss&format=simple&link=link" target="_blank">El confinamiento en pisos pequeños dispara la decoración de casas virtuales</a></h2>
+                <div class="summary">Las descargas de aplicaciones de interiorismo, construcción y jardinería aumentan durante la cuarentena</div>
+                <div class="footer">23/05/2020 20:58</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/06/18/tendencias/1592478768_341518_1592479135_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/06/18/tendencias/1592478768_341518.html#?ref=rss&format=simple&link=link" target="_blank">500 millones de whatsapps contra la covid-19</a></h2>
+                <div class="summary">La OMS ha incluido en su estrategia de comunicación global un chatbot que fue desarrollado para el Ministerio de Salud de Sudáfrica</div>
+                <div class="footer">19/06/2020 20:20</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="Portada de Tecnología | EL PAÍS">
+            
+            <img src="https://ep00.epimg.net/retina/imagenes/2020/05/15/innovacion/1589543941_383180_1589544218_noticia_normal.jpg" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">Portada de Tecnología | EL PAÍS</div>
+                <h2 class="title"><a href="https://elpais.com/retina/2020/05/15/innovacion/1589543941_383180.html#?ref=rss&format=simple&link=link" target="_blank">TikTok crece imparable en plena crisis del coronavirus</a></h2>
+                <div class="summary">TikTok engancha desde el primer segundo y lo hace gracias a dos factores que están resultando imbatibles: su reproducción sucesiva y un algoritmo francamente eficiente.</div>
+                <div class="footer">18/05/2020 15:21</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c3v25v922k4o?at_medium=RSS&at_campaign=rss" target="_blank">Síguelo en directo aquí</a></h2>
+                <div class="summary">Consulta los partidos, los marcadores y las tablas en tiempo real y en el horario de tu país</div>
+                <div class="footer">11/06/2026 15:07</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.co.uk/mundo/live/cdej7xpejgwt?at_medium=RSS&at_campaign=rss" target="_blank">¡Comenzó el Mundial 2026! Sigue el partido inaugural de México versus Sudáfrica en la Copa del Mundo</a></h2>
+                <div class="summary">En una ceremonia que fue una explosión de ritmo y color, Shakira, Maná, Los Ángeles Azules y otros artistas dieron inicio al Mundial de México, Estados Unidos y Canadá, el más grande jamás celebrado. Sigue el minuto a minuto del partido inaugural de México vs. Sudáfrica.</div>
+                <div class="footer"></div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cd0mgg47ry3o?at_medium=RSS&at_campaign=rss" target="_blank">El Mundial "más caro y más politizado": 4 claves del conflictivo megatorneo en Norteamérica</a></h2>
+                <div class="summary">Todo apunta a que, más allá del espectáculo futbolístico, este gigantesco Mundial será recordado como uno de los más polémicos de la historia.</div>
+                <div class="footer">11/06/2026 03:59</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c20y78xnzyko?at_medium=RSS&at_campaign=rss" target="_blank">Por qué en Colombia se trabaja mucho pero se produce poco (y el problema crónico que heredará el nuevo gobierno)</a></h2>
+                <div class="summary">La baja productividad es un problema que, según los expertos, debería estar en la cabeza de cualquier presidente que quiera aumentar los ingresos de los colombianos y hacer la economía del país más competitiva en el mercado global.</div>
+                <div class="footer">11/06/2026 13:01</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c1kye78j4nyo?at_medium=RSS&at_campaign=rss" target="_blank">Elecciones en Perú: Keiko Fujimori vuelve a adelantarse a Roberto Sánchez, pero menos de 1.000 votos los separan en las disputadas presidenciales</a></h2>
+                <div class="summary">Keiko Fujimori lidera el recuento de votos en las elecciones presidenciales de Perú con una mínima ventaja sobre Roberto Sánchez.</div>
+                <div class="footer">11/06/2026 15:00</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cvgl77mm733o?at_medium=RSS&at_campaign=rss" target="_blank">Los interrogantes que plantea la milagrosa supervivencia de un sherpa en el Everest</a></h2>
+                <div class="summary">¿Por qué un cocinero estaba guiando a unos clientes hasta la cima más alta del mundo? ¿Y por qué lo dejaron para que se apañara solo?</div>
+                <div class="footer">11/06/2026 17:25</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cgrkww90dgeo?at_medium=RSS&at_campaign=rss" target="_blank">Los científicos dicen que el fenómeno de El Niño ya empezó y advierten de los efectos climáticos extremos que puede traer</a></h2>
+                <div class="summary">Un fenómeno de El Niño ha comenzado oficialmente, según científicos estadounidenses, lo que genera temores de condiciones meteorológicas extremas y temperaturas más elevadas.</div>
+                <div class="footer">11/06/2026 18:46</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c74yxxwd73vo?at_medium=RSS&at_campaign=rss" target="_blank">Trump anuncia que cancela los ataques previstos contra Irán horas después de amenazar con un golpe "muy duro"</a></h2>
+                <div class="summary">El presidente estadounidense explica que ha tomado la decisión después de que las negociaciones con Irán fueran "elevadas al más alto nivel de la cúpula iraní y aprobadas".</div>
+                <div class="footer">11/06/2026 19:22</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/ckg8n3vxn8lo?at_medium=RSS&at_campaign=rss" target="_blank">El mercado ilegal de semen en el que se engaña a mujeres vulnerables que desean quedar embarazadas</a></h2>
+                <div class="summary">Una investigación de la BBC reveló que se pagaron US$133 por una muestra con entrega al día siguiente de un hombre que anunciaba su "semen para bebés" en internet</div>
+                <div class="footer">11/06/2026 10:28</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cly92ky7gn4o?at_medium=RSS&at_campaign=rss" target="_blank">"No es la peor película del año, pero sí quizás la más decepcionante": la dura crítica de la BBC de Disclosure Day, el nuevo filme de Spielberg</a></h2>
+                <div class="summary">A pesar de ser uno de los pioneros de la temática extraterrestre en el cine, la última película de Spielberg se queda corta a la hora de innovar.</div>
+                <div class="footer">11/06/2026 14:52</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c74y8kmre7xo?at_medium=RSS&at_campaign=rss" target="_blank">"Es un milagro que México siga siendo futbolero": por qué el Mundial despierta en el país tanta pasión con tan pocos resultados</a></h2>
+                <div class="summary">México será anfitrión de un Mundial por tercera vez, tiene una de las ligas más rentables del continente y 17 participaciones en Mundiales. Pero nunca ha llegado a una semifinal ni es reconocido por su calidad deportiva. Escritores y periodistas mexicanos nos explicaron la paradoja.</div>
+                <div class="footer">11/06/2026 14:52</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/ce8jxdm3yy6o?at_medium=RSS&at_campaign=rss" target="_blank">"Relájense": las polémicas respuestas de Infantino sobre Irán, el árbitro somalí y si perdió el control del Mundial</a></h2>
+                <div class="summary">El presidente de la FIFA dio polémicas declaraciones a la prensa un día antes del inicio de la Copa del Mundo.</div>
+                <div class="footer">11/06/2026 15:10</div>
+            </div>
+        </article>
+        
+    </div>
+
+    <script>
+        function filterSource(source, btnElement) {
+            // Actualizar el estado visual de los botones
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            
+            // Mostrar u ocultar las tarjetas según su data-source
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (source === 'all' || card.getAttribute('data-source') === source) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
