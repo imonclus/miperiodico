@@ -1,0 +1,19 @@
+# Entornos virtuales
+venv/
+env/
+.env
+
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos generados automáticamente
+public/
+mi_periodico.html
+output/
+
+# IDEs
+.vscode/
+.idea/
