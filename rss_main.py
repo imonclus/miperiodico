@@ -1,4 +1,5 @@
 import os
+import csv
 from rss_reader.fetcher import fetch_feeds
 from rss_reader.builder import build_html
 from rss_reader.groq_client import generate_editorial
@@ -6,16 +7,22 @@ from rss_reader.groq_client import generate_editorial
 def main():
     print("=== Generador de Periódico RSS ===")
     
-    feeds_file = "rss_reader/feeds.txt"
+    feeds_file = "rss_reader/fuentesrss.csv"
     if not os.path.exists(feeds_file):
         print(f"Error: No se encontró el archivo {feeds_file}.")
         return
         
-    with open(feeds_file, "r") as f:
-        urls = [line.strip() for line in f if line.strip() and not line.startswith("#")]
+    urls = []
+    with open(feeds_file, "r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if len(row) >= 2:
+                url = row[1].strip()
+                if url.startswith("http"):
+                    urls.append(url)
         
     if not urls:
-        print("No hay URLs configuradas en feeds.txt")
+        print(f"No hay URLs configuradas en {feeds_file}")
         return
         
     print(f"Leyendo {len(urls)} fuentes de noticias...")

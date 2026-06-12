@@ -1,3 +1,0 @@
-https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada
-http://ep00.epimg.net/rss/tecnologia/portada.xml
-https://feeds.bbci.co.uk/mundo/rss.xml

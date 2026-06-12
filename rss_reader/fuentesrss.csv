@@ -1,0 +1,78 @@
+1. Portadas / actualidad general,
+Medio,RSS
+El País – Portada,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada
+El País – Últimas noticias,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/ultimas-noticias/portada
+BBC Mundo,https://feeds.bbci.co.uk/mundo/rss.xml
+RTVE Noticias,https://www.rtve.es/rss/temas_noticias.xml
+La Vanguardia – Portada,https://www.lavanguardia.com/rss/home.xml
+elDiario.es,https://www.eldiario.es/rss/
+Público,https://www.publico.es/rss/
+El Español,https://www.elespanol.com/rss/
+Europa Press – Nacional,https://www.europapress.es/rss/rss.aspx?ch=00066
+2. Tecnología / ciencia,
+Medio,RSS
+El País – Tecnología,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/tecnologia/portada
+RTVE – Ciencia y tecnología,https://www.rtve.es/rss/temas_ciencia-tecnologia.xml
+La Vanguardia – Tecnología,https://www.lavanguardia.com/rss/tecnologia.xml
+Xataka,https://www.xataka.com/feedburner.xml
+Genbeta,https://www.genbeta.com/feedburner.xml
+Microsiervos,https://www.microsiervos.com/index.xml
+MIT Technology Review,https://www.technologyreview.com/feed/
+Wired,https://www.wired.com/feed/rss
+3. Internacional,
+Medio,RSS
+El País – Internacional,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada
+RTVE – Mundo,https://www.rtve.es/rss/temas_mundo.xml
+BBC Mundo,https://feeds.bbci.co.uk/mundo/rss.xml
+BBC News – World,https://feeds.bbci.co.uk/news/world/rss.xml
+France 24 Español,https://www.france24.com/es/rss
+Deutsche Welle Español,https://rss.dw.com/xml/rss-sp-top
+The Guardian – World,https://www.theguardian.com/world/rss
+Le Monde – Internacional,https://www.lemonde.fr/international/rss_full.xml
+4. Economía / empresas,
+Medio,RSS
+El País – Economía,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/economia/portada
+Cinco Días – Lo último,https://feeds.elpais.com/mrss-s/pages/ep/site/cincodias.elpais.com/portada
+Cinco Días – Mercados,https://feeds.elpais.com/mrss-s/pages/ep/site/cincodias.elpais.com/section/mercados/portada
+RTVE – Economía,https://www.rtve.es/rss/temas_economia.xml
+La Vanguardia – Economía,https://www.lavanguardia.com/rss/economia.xml
+El Economista,https://www.eleconomista.es/rss/rss-portada.php
+Expansión – Portada,https://e00-expansion.uecdn.es/rss/portada.xml
+5. Cultura / libros / música,
+Medio,RSS
+El País – Cultura,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/cultura/portada
+El País – Babelia,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/babelia/portada
+RTVE – Cultura,https://www.rtve.es/rss/temas_cultura.xml
+La Vanguardia – Cultura,https://www.lavanguardia.com/rss/cultura.xml
+Jot Down,https://www.jotdown.es/feed/
+Letras Libres,https://letraslibres.com/feed/
+Scherzo,https://scherzo.es/feed/
+6. Educación / sociedad / medio ambiente,
+Medio,RSS
+El País – Educación,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/educacion/portada
+El País – Sociedad,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/sociedad/portada
+El País – Clima y medio ambiente,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/clima-y-medio-ambiente/portada
+RTVE – España,https://www.rtve.es/rss/temas_espana.xml
+La Vanguardia – Vida,https://www.lavanguardia.com/rss/vida.xml
+The Conversation España,https://theconversation.com/es/articles.atom
+7. Deportes,
+Medio,RSS
+El País – Deportes,https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/deportes/portada
+RTVE – Deportes,https://www.rtve.es/rss/temas_noticias-deportes.xml
+La Vanguardia – Deportes,https://www.lavanguardia.com/rss/deportes.xml
+Marca – Portada,https://e00-marca.uecdn.es/rss/portada.xml
+AS – Portada,https://as.com/rss/
+Mundo Deportivo,https://www.mundodeportivo.com/rss/home.xml
+,
+,
+00_Portadas,
+01_España,
+02_Internacional,
+03_Tecnología,
+04_Ciencia,
+05_Economía,
+06_Cultura,
+07_Educación,
+08_Medio ambiente,
+09_Deportes,
+10_Opinión,
