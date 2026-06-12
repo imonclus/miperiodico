@@ -210,7 +210,7 @@
         {% for category, text in editorials.items() %}
         <div class="editorial-box" data-editorial-category="{{ category }}" style="display: none;">
             <h3 style="margin-top:0; color: var(--primary);">✨ Resumen IA: {{ category }}</h3>
-            <p style="margin-bottom:0; font-size: 1.05rem;">{{ text }}</p>
+            <p style="margin-bottom:0; font-size: 1.05rem; text-align: justify; line-height: 1.7;">{{ text }}</p>
         </div>
         {% endfor %}
     </div>

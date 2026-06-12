@@ -22,7 +22,7 @@ Redacta un único párrafo breve (máximo 3 frases) en español, resumiendo los 
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
-            max_tokens=150,
+            max_tokens=350,
         )
         print(f"✅ Resumen generado con éxito para: {category}")
         return category, completion.choices[0].message.content.strip()
