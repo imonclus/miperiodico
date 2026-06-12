@@ -2,7 +2,6 @@ import os
 import csv
 from rss_reader.fetcher import fetch_feeds
 from rss_reader.builder import build_html
-from rss_reader.groq_client import generate_editorial
 
 def main():
     print("=== Generador de Periódico RSS ===")
