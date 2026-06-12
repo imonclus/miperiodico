@@ -71,22 +71,27 @@
             color: white;
             border-color: var(--primary);
         }
-        .update-link {
-            display: inline-block;
-            margin-top: 0.5rem;
-            font-size: 0.85rem;
-            color: var(--primary);
-            text-decoration: none;
-            padding: 0.4rem 1rem;
-            border: 1px solid var(--primary);
-            border-radius: 20px;
-            transition: all 0.2s ease;
-            background-color: var(--card-bg);
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
         }
-        .update-link:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-2px);
+        #searchInput {
+            width: 100%;
+            max-width: 600px;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
         .sub-filters {
             display: flex;
@@ -195,10 +200,11 @@
     <header>
         <h1>🗞️ Tu Periódico Personal</h1>
         <p>Actualizado el: {{ last_updated }}</p>
-        <a href="https://github.com/imonclus/miperiodico/actions/workflows/deploy.yml" target="_blank" class="update-link" title="Ir a GitHub para forzar una actualización manual">
-            🔄 Actualizar ahora
-        </a>
     </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Buscar noticias (ej: Zapatero, política, etc.)..." oninput="searchArticles()">
+    </div>
 
     <div class="editorial-container">
         {% for category, text in editorials.items() %}
@@ -246,7 +252,14 @@
     </div>
 
     <script>
+        let currentCategory = 'all';
+        let currentSource = 'all';
+
         function filterCategory(category, btnElement) {
+            currentCategory = category;
+            currentSource = 'all';
+            document.getElementById('searchInput').value = ''; // Limpiar búsqueda al cambiar categoría
+            
             // Actualizar el estado visual de los botones de categoria
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
@@ -264,41 +277,67 @@
                 }
             });
             
-            // Mostrar u ocultar las tarjetas según su data-category
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            
-            // Mostrar el resumen de IA correspondiente a la categoría
-            const editorials = document.querySelectorAll('.editorial-box');
-            editorials.forEach(box => {
-                if (category !== 'all' && box.getAttribute('data-editorial-category') === category) {
-                    box.style.display = 'block';
-                } else {
-                    box.style.display = 'none';
-                }
-            });
+            applyFilters();
         }
         
         function filterSource(source, category, btnElement) {
+            currentSource = source;
+            document.getElementById('searchInput').value = ''; // Limpiar búsqueda al cambiar fuente
+            
             // Actualizar estado visual de subbotones
             const parentNav = btnElement.closest('.sub-filters');
             parentNav.querySelectorAll('.sub-filter-btn').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
             
-            // Filtrar las tarjetas que pertenecen a la categoria actual
+            applyFilters();
+        }
+        
+        function searchArticles() {
+            applyFilters();
+        }
+        
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const cards = document.querySelectorAll('.card');
+            
             cards.forEach(card => {
-                if (card.getAttribute('data-category') === category) {
-                    if (source === 'all' || card.getAttribute('data-source') === source) {
+                const title = card.querySelector('.title').textContent.toLowerCase();
+                const summary = card.querySelector('.summary').textContent.toLowerCase();
+                const matchesSearch = title.includes(searchTerm) || summary.includes(searchTerm);
+                
+                // Si hay una búsqueda activa, buscamos en TODAS las categorías ignorando el filtro actual
+                if (searchTerm.length > 0) {
+                    if (matchesSearch) {
                         card.style.display = 'flex';
                     } else {
                         card.style.display = 'none';
+                    }
+                } else {
+                    // Si no hay búsqueda, aplicamos los filtros de categoría y fuente
+                    const cardCat = card.getAttribute('data-category');
+                    const cardSource = card.getAttribute('data-source');
+                    
+                    const matchesCategory = (currentCategory === 'all' || cardCat === currentCategory);
+                    const matchesSource = (currentSource === 'all' || cardSource === currentSource);
+                    
+                    if (matchesCategory && matchesSource) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Ocultar resúmenes IA durante la búsqueda, o mostrarlos según categoría si no hay búsqueda
+            const editorials = document.querySelectorAll('.editorial-box');
+            editorials.forEach(box => {
+                if (searchTerm.length > 0) {
+                    box.style.display = 'none';
+                } else {
+                    if (currentCategory !== 'all' && box.getAttribute('data-editorial-category') === currentCategory) {
+                        box.style.display = 'block';
+                    } else {
+                        box.style.display = 'none';
                     }
                 }
             });
