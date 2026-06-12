@@ -71,6 +71,23 @@
             color: white;
             border-color: var(--primary);
         }
+        .update-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            background-color: var(--card-bg);
+        }
+        .update-link:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -141,7 +158,10 @@
 <body>
     <header>
         <h1>🗞️ Tu Periódico Personal</h1>
-        <p>Actualizado el: 11/06/2026 20:58</p>
+        <p>Actualizado el: 12/06/2026 07:13</p>
+        <a href="https://github.com/imonclus/miperiodico/actions/workflows/deploy.yml" target="_blank" class="update-link" title="Ir a GitHub para forzar una actualización manual">
+            🔄 Actualizar ahora
+        </a>
     </header>
     
     <nav class="filters">
@@ -171,131 +191,133 @@
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
+            <img src="https://imagenes.elpais.com/resizer/v2/HIRIS2IFWBG7BJ6DG6H3ZSW5Z4.jpg?auth=85b7e0fe65d55337d5ed296596341a63f8e892164c533580f81e19a473522a4e" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
+            <div class="card-content">
+                <div class="source">EL PAÍS: el periódico global</div>
+                <h2 class="title"><a href="https://elpais.com/economia/2026-06-12/herencia-compra-o-donacion-el-origen-de-las-joyas-de-zapatero-determinara-si-hay-incumplimiento-fiscal.html" target="_blank">Herencia, compra o donación: el origen de las joyas de Zapatero determinará si hay incumplimiento fiscal</a></h2>
+                <div class="summary">Los expertos tributarios explican que la valoración preliminar del ajuar, de unos 1,3 millones, supera con creces el límite de 120.000 euros a partir del cual la ley contempla consecuencias penales</div>
+                <div class="footer">12/06/2026 04:30</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="EL PAÍS: el periódico global">
+            
             <img src="https://imagenes.elpais.com/resizer/v2/4TOIXKV43FHE5MGG7ZRZBUR5XA.jpg?auth=3406318182b282b9483095fd5ad65872e1e30e9c6da782358e533e530698d395" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
                 <h2 class="title"><a href="https://elpais.com/espana/2026-06-11/la-tasacion-de-las-joyas-incautadas-a-zapatero-cifra-su-valor-en-unos-13-millones-de-euros.html" target="_blank">La tasación de las joyas incautadas a Zapatero cifra su valor en unos 1,3 millones de euros</a></h2>
                 <div class="summary">La valoración la ha llevado a cabo la joyería Ansorena, con la participación del Instituto Gemológico Español, por orden del juez Calama</div>
-                <div class="footer">11/06/2026 19:16</div>
+                <div class="footer">11/06/2026 20:34</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
-            <img src="https://imagenes.elpais.com/resizer/v2/GW5MNXY7MND7ROZ6NEFYJPVYEY.jpg?auth=fe5562548b9b928e81cc3a80900656d4ce12b0d0790b0bd82bcbaf75d7769996" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="https://imagenes.elpais.com/resizer/v2/FQAVADQ2ZBBQBJ4VL4TA267DLY.jpg?auth=4561d865779f487ce1b276ce6b16f788e40e520e2eb2f86818323616ec13395a" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/internacional/2026-06-11/ultima-hora-de-la-guerra-de-estados-unidos-e-israel-contra-iran-en-directo.html" target="_blank">Última hora de la guerra de Estados Unidos e Israel contra Irán, en directo | Irán desmiente a Trump y asegura que no ha aprobado ningún acuerdo con EE UU</a></h2>
-                <div class="summary">Trump suspende los ataques tras asegurar que se han aprobado “los puntos finales” del acuerdo | Teherán denuncia que los últimos ataques de Washington dejan “sin efecto en la práctica” el alto el fuego</div>
-                <div class="footer">11/06/2026 19:56</div>
+                <h2 class="title"><a href="https://elpais.com/espana/2026-06-12/zapatero-y-leire-diez-disparan-la-preocupacion-por-la-corrupcion-entre-los-votantes-del-psoe.html" target="_blank">Zapatero y Leire Díez disparan la preocupación por la corrupción entre los votantes del PSOE</a></h2>
+                <div class="summary">Quienes sitúan el fraude entre los tres mayores problemas del país casi se triplican en el electorado socialista. Cae la confianza en Sánchez, aunque sigue superando a Feijóo. El golpe al PSOE es menor que tras la caída de Cerdán, según el CIS y 40dB.</div>
+                <div class="footer">12/06/2026 04:30</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
-            <img src="https://imagenes.elpais.com/resizer/v2/SBF3AFL4BVARNCCJ2JRVRQ2QRA.JPG?auth=796bbbf4ac354e0f50a5e4d306ac649905c378bb139ed23a5b01ed2bcf616299" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="https://imagenes.elpais.com/resizer/v2/P2AJI2ULKFJORCUNUNFA3MXJXU.jpg?auth=6d20f3bf406eb0488afff619b2dd0cdb44f55efb3b9eb7c5f614a30ebd06ed22" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/mexico/2026-06-11/mexico-sudafrica-la-inauguracion-del-mundial-2026-en-vivo.html" target="_blank">México - Sudáfrica, en vivo | Las selecciones calientan en el Azteca en la previa del partido inaugural</a></h2>
-                <div class="summary">México vuelve a ser anfitrión 40 años después y se convierte así en el único país en albergar tres veces un Mundial, organizado este año junto a EE UU y Canadá. Shakira, Maná y Los Ángeles Azules destacaron en la ceremonia de inauguración. Las movilizaciones sociales marcaron la jornada antes del arranque del juego</div>
-                <div class="footer">11/06/2026 19:55</div>
+                <h2 class="title"><a href="https://elpais.com/economia/2026-06-12/la-salida-a-bolsa-de-spacex-convierte-a-elon-musk-en-el-primer-billonario-del-mundo.html" target="_blank">La salida a Bolsa de SpaceX convierte a Elon Musk en el primer billonario del mundo</a></h2>
+                <div class="summary">El magnate tecnológico, que ya era la persona más rica del mundo, suma la empresa de cohetes, satélites e IA a su participación en Tesla, Neurolink y The Boring Thing</div>
+                <div class="footer">12/06/2026 04:45</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
+            <img src="https://imagenes.elpais.com/resizer/v2/5H4FWM6PXRNC7A3BWSBDEENT4E.jpg?auth=06f08d1924076e48b8892fb51f1f01314634dbfde4d2f9dda47ccf4f3a8a6d80" alt="Imagen de noticia" class="card-img" loading="lazy">
+            
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/deportes/mundial-futbol/2026-06-11/quien-ganara-el-mundial-asi-arrancan-nuestras-predicciones.html" target="_blank">¿Quién ganará el Mundial? Así arrancan nuestras predicciones</a></h2>
-                <div class="summary">El modelo estadístico de EL PAÍS dice que España es la favorita. Pero cuidado: solo gana una de cada seis veces. Consulte las opciones actualizadas de cada selección</div>
-                <div class="footer">11/06/2026 04:40</div>
+                <h2 class="title"><a href="https://elpais.com/economia/2026-06-12/spacex-un-imperio-corporativo-blindado-y-defendido-por-la-guardia-pretoriana-de-incondicionales.html" target="_blank">SpaceX, un imperio corporativo blindado y defendido por la guardia pretoriana de incondicionales</a></h2>
+                <div class="summary">Musk se apoya en una legión de pequeños inversores de férrea lealtad a la vez que levanta cada vez más murallas ante posibles accionistas críticos</div>
+                <div class="footer">12/06/2026 04:30</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
-            <img src="https://imagenes.elpais.com/resizer/v2/6S6N64J6WNMVDKSXOGKGGRAY4Y.jpg?auth=29b033c963d7d0bfb6b1bb7c9b0f5f3a04dcad9ee2b1efe55979b34951757571" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="https://imagenes.elpais.com/resizer/v2/KBT4XRADNZACZBYGW4QNWOC3AE.jpg?auth=e62c281b653b5895c7611c063d5336cb4dc8af6f891624d720f3b538474b5269" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/mexico/2026-06-11/la-ceremonia-de-inauguracion-de-la-copa-del-mundo-2026-en-imagenes.html" target="_blank">La ceremonia de inauguración de la Copa del Mundo 2026, en imágenes</a></h2>
-                <div class="summary">La 23ª edición de la Copa Mundial marca un hito histórico al ser el primer torneo organizado conjuntamente por tres países: México, Estados Unidos y Canadá. Es el primer mundial con formato de 48 selecciones participantes y se disputarán un total de 104 partidos</div>
-                <div class="footer">11/06/2026 19:03</div>
+                <h2 class="title"><a href="https://elpais.com/cultura/2026-06-12/francois-jozic-director-del-sonar-boicotear-la-cultura-no-soluciona-los-problemas-de-oriente-proximo.html" target="_blank">François Jozic, director del Sónar: “Boicotear la cultura no soluciona los problemas de Oriente Próximo”</a></h2>
+                <div class="summary">El nuevo responsable de la gran cita de música electrónica de Barcelona afronta su primer festival después de una edición polémica</div>
+                <div class="footer">12/06/2026 04:30</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
-            <img src="https://imagenes.elpais.com/resizer/v2/BTKV3Z2IWVE6FM4GZAQ4OS4JCE.jpg?auth=183bf59475aeb22ea583a94efcf6424d4b75bb2d3564ab9f8399026159efb036" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="https://imagenes.elpais.com/resizer/v2/AO2I2HRZKNBBJDS6CKQVYEHTHQ.jpg?auth=40ad8e721f420696fc8648816b8fc6957bf1d2af7ce340d134ece19436cfd4b3" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/deportes/futbol/2026-06-11/el-real-madrid-ha-oficial-el-fichaje-de-jose-mourinho-para-el-banquillo.html" target="_blank">El Real Madrid hace oficial el fichaje de José Mourinho para el banquillo</a></h2>
-                <div class="summary">El técnico portugués, que regresa a la entidad blanca tras su primera etapa entre 2010 y 2013, firma por tres temporadas</div>
-                <div class="footer">11/06/2026 19:19</div>
+                <h2 class="title"><a href="https://elpais.com/gente/2026-06-12/hoyt-richards-como-el-supermodelo-mejor-pagado-del-mundo-fue-abducido-por-una-secta-que-lavaba-el-cerebro-a-los-guapos.html" target="_blank">Hoyt Richards, cómo el supermodelo mejor pagado del mundo fue abducido por una secta que lavaba el cerebro a los guapos</a></h2>
+                <div class="summary">El primer ‘top model’ masculino de la historia desvela los secretos de Eternal Values, culto liderado por Frederick von Mierers, en el documental ‘Traedme a los guapos’: moda, alienígenas y apocalipsis en tiempos de capitalismo salvaje</div>
+                <div class="footer">12/06/2026 04:30</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
-            <img src="https://vdmedia.elpais.com/mcv/elpais/multimedia/20260611/1182360_120814_video_1800.mp4" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="https://vdmedia.elpais.com/mcv/elpais/multimedia/20260610/1181936_134910_video_1800.mp4" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/espana/2026-06-11/el-papa-en-el-muelle-de-los-cayucos-de-arguineguin-no-podemos-acostumbrarnos-a-contar-muertos-la-dignidad-humana-no-tiene-pasaporte.html" target="_blank">El Papa, en el muelle de los cayucos de Arguineguín: “No podemos acostumbrarnos a contar muertos. La dignidad humana no tiene pasaporte”</a></h2>
-                <div class="summary">León XIV hace en Canarias y ante Pedro Sánchez un duro discurso contra la discriminación de migrantes y a favor de la acogida: “Cada vida que llega nos pregunta qué queda de nuestra humanidad”</div>
-                <div class="footer">11/06/2026 12:40</div>
+                <h2 class="title"><a href="https://elpais.com/cultura/cine/2026-06-12/el-dia-de-la-revelacion-pero-esto-que-es-admirable-spielberg.html" target="_blank">‘El día de la revelación’: pero, ¿esto qué es, admirable Spielberg?</a></h2>
+                <div class="summary">El gran interrogante es cómo este cineasta, a pesar de su contrastada sabiduría, ha realizado una película tan fofa, sin cuerpo ni alma, y más abordando un tema que le apasiona</div>
+                <div class="footer">12/06/2026 04:30</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
-            <img src="https://vdmedia.elpais.com/mcv/elpais/multimedia/20260611/1182397_133802_video_1800.mp4" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="https://vdmedia.elpais.com/mcv/elpais/multimedia/20260611/1182595_215512_video_1800.mp4" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/espana/2026-06-11/para-que-sirve-la-visita-de-un-papa-robert-prevost-insufla-la-solidaridad-de-los-canarios-con-la-migracion.html" target="_blank">¿Para qué sirve la visita de un papa? Robert Prevost impulsa la solidaridad de los canarios con la migración</a></h2>
-                <div class="summary">El muelle de Arguineguín reúne bajo el manto del Pontífice a las organizaciones civiles y religiosas que luchan por los derechos humanos</div>
-                <div class="footer">11/06/2026 17:51</div>
+                <h2 class="title"><a href="https://elpais.com/mexico/2026-06-11/mexico-rompe-el-maleficio-2-0-ante-sudafrica-en-la-fiesta-de-la-capital-mundial-del-futbol.html" target="_blank">México rompe el maleficio ante Sudáfrica en la fiesta de la capital mundial del fútbol</a></h2>
+                <div class="summary">Los anfitriones superan a una tierna selección africana en un totémico y entregado Estadio Azteca, logran su primera victoria en un partido de estreno mundialista y dan por iniciada la Copa del Mundo</div>
+                <div class="footer">11/06/2026 22:11</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
-            <img src="https://imagenes.elpais.com/resizer/v2/OZFZXTEOSBETVB5CSQAPWKAUCE.jpg?auth=b239847d956c55253737b5e58c068772b30c3a6793bc58300238e5890018cb61" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="https://imagenes.elpais.com/resizer/v2/PCDAIDMNMJK5RMA3LLTZ2QHBZU.jpg?auth=715ff04683569d34c09303c4d907f2fd5bab47b3f0381ee3663874701a1d9484" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/sociedad/2026-06-11/condenado-un-informatico-a-57-anos-por-robar-fotos-intimas-a-14-personas-mientras-les-arreglaba-el-ordenador.html" target="_blank">Condenado un informático a 57 años por robar fotos íntimas a 14 personas mientras les arreglaba el ordenador</a></h2>
-                <div class="summary">“La sentencia es ejemplar, pero se ha tardado mucho”, lamenta una de las víctimas tras una década de espera. La Guardia Civil encontró 314 carpetas de clientes a los que grabó sin su conocimiento o les quitó material privado</div>
-                <div class="footer">11/06/2026 15:00</div>
+                <h2 class="title"><a href="https://elpais.com/mexico/2026-06-11/una-ceremonia-neutra-para-un-mundial-revuelto.html" target="_blank">Una ceremonia neutra para un Mundial revuelto</a></h2>
+                <div class="summary">Si Bad Bunny enumeró con orgullo los países latinos en la Super Bowl, aquí J Balvin hizo la cuenta pero con mujeres y Shakira, con jugadores retirados</div>
+                <div class="footer">12/06/2026 05:03</div>
             </div>
         </article>
         
         <article class="card" data-source="EL PAÍS: el periódico global">
             
-            <img src="https://vdmedia.elpais.com/mcv/elpais/multimedia/20260611/1182453_154226_video_1800.mp4" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="https://imagenes.elpais.com/resizer/v2/ZGXVRVHAKFOFFFLXAXIFCZZYZE.jpg?auth=31f24cbf8fbc26bca5f84271cf7d043a8d501b7317d4d131e8bc73fe8006dd7b" alt="Imagen de noticia" class="card-img" loading="lazy">
             
             <div class="card-content">
                 <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/economia/2026-06-11/el-bce-sube-los-tipos-por-primera-vez-en-casi-tres-anos-para-atajar-la-inflacion.html" target="_blank">El BCE sube los tipos por primera vez en casi tres años y empeora sus previsiones de inflación</a></h2>
-                <div class="summary">El incremento de 0,25 puntos sitúa el precio del dinero en el 2,25%. El encarecimiento del barril de petróleo por la guerra en Irán ha sacado al Eurobanco de su letargo, y los mercados no descartan otro incremento este mismo año</div>
-                <div class="footer">11/06/2026 13:15</div>
-            </div>
-        </article>
-        
-        <article class="card" data-source="EL PAÍS: el periódico global">
-            
-            <img src="https://imagenes.elpais.com/resizer/v2/FEVTLPARVFGT5A3Z4YMT252BU4.JPG?auth=50e2b06a7d6b18291aa7f0d1bbaf8d48d3743d18938809bd217f5abe0b8d4752" alt="Imagen de noticia" class="card-img" loading="lazy">
-            
-            <div class="card-content">
-                <div class="source">EL PAÍS: el periódico global</div>
-                <h2 class="title"><a href="https://elpais.com/espana/2026-06-11/el-juez-autoriza-a-la-uco-a-rastrear-las-cuentas-del-novio-de-ayuso-desde-2014.html" target="_blank">El juez autoriza a la UCO a rastrear las cuentas del novio de Ayuso desde 2014</a></h2>
-                <div class="summary">El magistrado Antonio Viejo acuerda esta diligencia seis meses después de que así lo reclamara la Guardia Civil</div>
-                <div class="footer">11/06/2026 12:10</div>
+                <h2 class="title"><a href="https://elpais.com/deportes/mundial-futbol/2026-06-12/dimelo-a-mi.html" target="_blank">¡Dímelo a mí!</a></h2>
+                <div class="summary">Extrañamente, el fútbol me sigue irritando, deprimiendo y entusiasmando, y el paso de los años no ha menguado estas reacciones</div>
+                <div class="footer">12/06/2026 04:30</div>
             </div>
         </article>
         
@@ -457,9 +479,9 @@
             
             <div class="card-content">
                 <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.co.uk/mundo/live/cdej7xpejgwt?at_medium=RSS&at_campaign=rss" target="_blank">¡Comenzó el Mundial 2026! Sigue el partido inaugural de México versus Sudáfrica en la Copa del Mundo</a></h2>
-                <div class="summary">En una ceremonia que fue una explosión de ritmo y color, Shakira, Maná, Los Ángeles Azules y otros artistas dieron inicio al Mundial de México, Estados Unidos y Canadá, el más grande jamás celebrado. Sigue el minuto a minuto del partido inaugural de México vs. Sudáfrica.</div>
-                <div class="footer"></div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c4gypx283p5o?at_medium=RSS&at_campaign=rss" target="_blank">Cómo es el dron marítimo con el que EE.UU. rescató a los tripulantes del helicóptero Apache derribado en el estrecho de Ormuz</a></h2>
+                <div class="summary">BBC Verify investiga lo que se conoce sobre el barco teledirigido Corsair y cómo se realizó la misión de rescate.</div>
+                <div class="footer">11/06/2026 23:27</div>
             </div>
         </article>
         
@@ -467,29 +489,9 @@
             
             <div class="card-content">
                 <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cd0mgg47ry3o?at_medium=RSS&at_campaign=rss" target="_blank">El Mundial "más caro y más politizado": 4 claves del conflictivo megatorneo en Norteamérica</a></h2>
-                <div class="summary">Todo apunta a que, más allá del espectáculo futbolístico, este gigantesco Mundial será recordado como uno de los más polémicos de la historia.</div>
-                <div class="footer">11/06/2026 03:59</div>
-            </div>
-        </article>
-        
-        <article class="card" data-source="BBC Mundo">
-            
-            <div class="card-content">
-                <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c20y78xnzyko?at_medium=RSS&at_campaign=rss" target="_blank">Por qué en Colombia se trabaja mucho pero se produce poco (y el problema crónico que heredará el nuevo gobierno)</a></h2>
-                <div class="summary">La baja productividad es un problema que, según los expertos, debería estar en la cabeza de cualquier presidente que quiera aumentar los ingresos de los colombianos y hacer la economía del país más competitiva en el mercado global.</div>
-                <div class="footer">11/06/2026 13:01</div>
-            </div>
-        </article>
-        
-        <article class="card" data-source="BBC Mundo">
-            
-            <div class="card-content">
-                <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c1kye78j4nyo?at_medium=RSS&at_campaign=rss" target="_blank">Elecciones en Perú: Keiko Fujimori vuelve a adelantarse a Roberto Sánchez, pero menos de 1.000 votos los separan en las disputadas presidenciales</a></h2>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c1kye78j4nyo?at_medium=RSS&at_campaign=rss" target="_blank">Elecciones en Perú: Keiko Fujimori adelanta a Roberto Sánchez, pero menos de 1.000 votos los separan en las disputadas presidenciales</a></h2>
                 <div class="summary">Keiko Fujimori lidera el recuento de votos en las elecciones presidenciales de Perú con una mínima ventaja sobre Roberto Sánchez.</div>
-                <div class="footer">11/06/2026 15:00</div>
+                <div class="footer">11/06/2026 20:36</div>
             </div>
         </article>
         
@@ -497,9 +499,9 @@
             
             <div class="card-content">
                 <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cvgl77mm733o?at_medium=RSS&at_campaign=rss" target="_blank">Los interrogantes que plantea la milagrosa supervivencia de un sherpa en el Everest</a></h2>
-                <div class="summary">¿Por qué un cocinero estaba guiando a unos clientes hasta la cima más alta del mundo? ¿Y por qué lo dejaron para que se apañara solo?</div>
-                <div class="footer">11/06/2026 17:25</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cd95xj7e9g8o?at_medium=RSS&at_campaign=rss" target="_blank">La princesa Bajrakitiyabha de Tailandia muere tras pasar más de 3 años en coma</a></h2>
+                <div class="summary">Bajrakitiyabha era la mayor de los siete hijos del rey Vajiralongkorn y la miembro más destacada de la realeza tailandesa.</div>
+                <div class="footer">12/06/2026 03:11</div>
             </div>
         </article>
         
@@ -517,9 +519,9 @@
             
             <div class="card-content">
                 <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c74yxxwd73vo?at_medium=RSS&at_campaign=rss" target="_blank">Trump anuncia que cancela los ataques previstos contra Irán horas después de amenazar con un golpe "muy duro"</a></h2>
-                <div class="summary">El presidente estadounidense explica que ha tomado la decisión después de que las negociaciones con Irán fueran "elevadas al más alto nivel de la cúpula iraní y aprobadas".</div>
-                <div class="footer">11/06/2026 19:22</div>
+                <h2 class="title"><a href="https://www.bbc.co.uk/mundo/live/cdej7xpejgwt?at_medium=RSS&at_campaign=rss" target="_blank">México comienza el Mundial con paso firme: 2-0 ante Sudáfrica y emoción de Raúl Jiménez</a></h2>
+                <div class="summary">El Tri había participado en 7 partidos inaugurales pero nunca había logrado ganar, hasta ahora. Y lo hizo con contundencia. Antes, la ceremonia de apertura fue una explosión de ritmo y color con Shakira, Maná y otros artistas dando inicio a la Copa del Mundo 2026.</div>
+                <div class="footer"></div>
             </div>
         </article>
         
@@ -527,9 +529,9 @@
             
             <div class="card-content">
                 <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/ckg8n3vxn8lo?at_medium=RSS&at_campaign=rss" target="_blank">El mercado ilegal de semen en el que se engaña a mujeres vulnerables que desean quedar embarazadas</a></h2>
-                <div class="summary">Una investigación de la BBC reveló que se pagaron US$133 por una muestra con entrega al día siguiente de un hombre que anunciaba su "semen para bebés" en internet</div>
-                <div class="footer">11/06/2026 10:28</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c74yxxwd73vo?at_medium=RSS&at_campaign=rss" target="_blank">Trump apunta a la posible firma de un acuerdo para poner fin a la guerra tras cancelar los ataques previstos contra Irán</a></h2>
+                <div class="summary">El presidente estadounidense explica que decidió cancelar los ataques después de que las negociaciones con Irán fueran "elevadas al más alto nivel de la cúpula iraní y aprobadas".</div>
+                <div class="footer">12/06/2026 01:21</div>
             </div>
         </article>
         
@@ -537,9 +539,9 @@
             
             <div class="card-content">
                 <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cly92ky7gn4o?at_medium=RSS&at_campaign=rss" target="_blank">"No es la peor película del año, pero sí quizás la más decepcionante": la dura crítica de la BBC de Disclosure Day, el nuevo filme de Spielberg</a></h2>
-                <div class="summary">A pesar de ser uno de los pioneros de la temática extraterrestre en el cine, la última película de Spielberg se queda corta a la hora de innovar.</div>
-                <div class="footer">11/06/2026 14:52</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c20y78xnzyko?at_medium=RSS&at_campaign=rss" target="_blank">Por qué en Colombia se trabaja mucho pero se produce poco (y el problema crónico que heredará el nuevo gobierno)</a></h2>
+                <div class="summary">La baja productividad es un problema que, según los expertos, debería estar en la cabeza de cualquier presidente que quiera aumentar los ingresos de los colombianos y hacer la economía del país más competitiva en el mercado global.</div>
+                <div class="footer">11/06/2026 13:01</div>
             </div>
         </article>
         
@@ -547,9 +549,29 @@
             
             <div class="card-content">
                 <div class="source">BBC Mundo</div>
-                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/c74y8kmre7xo?at_medium=RSS&at_campaign=rss" target="_blank">"Es un milagro que México siga siendo futbolero": por qué el Mundial despierta en el país tanta pasión con tan pocos resultados</a></h2>
-                <div class="summary">México será anfitrión de un Mundial por tercera vez, tiene una de las ligas más rentables del continente y 17 participaciones en Mundiales. Pero nunca ha llegado a una semifinal ni es reconocido por su calidad deportiva. Escritores y periodistas mexicanos nos explicaron la paradoja.</div>
-                <div class="footer">11/06/2026 14:52</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cddl6ejyg5po?at_medium=RSS&at_campaign=rss" target="_blank">Quién es Julián Quiñones, el colombo-mexicano que anotó el primer gol del Mundial 2026 en el triunfo del Tri ante Sudáfrica en el partido inaugural</a></h2>
+                <div class="summary">Una historia digna de ser contada: la del colombiano que se nacionalizó mexicano y acabó anotando un gol determinante para El Tri.</div>
+                <div class="footer">11/06/2026 22:46</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cvgl77mm733o?at_medium=RSS&at_campaign=rss" target="_blank">Las interrogantes que plantea la milagrosa supervivencia de un sherpa en el Everest</a></h2>
+                <div class="summary">¿Por qué un cocinero estaba guiando a unos clientes hasta la cima más alta del mundo? ¿Y por qué lo dejaron para que se apañara solo?</div>
+                <div class="footer">11/06/2026 17:25</div>
+            </div>
+        </article>
+        
+        <article class="card" data-source="BBC Mundo">
+            
+            <div class="card-content">
+                <div class="source">BBC Mundo</div>
+                <h2 class="title"><a href="https://www.bbc.com/mundo/articles/cd0mgg47ry3o?at_medium=RSS&at_campaign=rss" target="_blank">El Mundial "más caro y más politizado": 4 claves del conflictivo megatorneo en Norteamérica</a></h2>
+                <div class="summary">Todo apunta a que, más allá del espectáculo futbolístico, este gigantesco Mundial será recordado como uno de los más polémicos de la historia.</div>
+                <div class="footer">11/06/2026 03:59</div>
             </div>
         </article>
         

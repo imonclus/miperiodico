@@ -71,6 +71,36 @@
             color: white;
             border-color: var(--primary);
         }
+        .update-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            background-color: var(--card-bg);
+        }
+        .update-link:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        .editorial-container {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            padding: 0 1rem;
+        }
+        .editorial-box {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-style: italic;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -142,7 +172,19 @@
     <header>
         <h1>🗞️ Tu Periódico Personal</h1>
         <p>Actualizado el: {{ current_time }}</p>
+        <a href="https://github.com/imonclus/miperiodico/actions/workflows/deploy.yml" target="_blank" class="update-link" title="Ir a GitHub para forzar una actualización manual">
+            🔄 Actualizar ahora
+        </a>
     </header>
+
+    {% if editorial %}
+    <div class="editorial-container">
+        <div class="editorial-box">
+            <h3 style="margin-top:0; color: var(--primary);">✨ Editorial del Día</h3>
+            <p style="margin-bottom:0; font-size: 1.05rem;">{{ editorial }}</p>
+        </div>
+    </div>
+    {% endif %}
     
     <nav class="filters">
         <button class="filter-btn active" onclick="filterSource('all', this)">Todas las noticias</button>

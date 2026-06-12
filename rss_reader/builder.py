@@ -1,8 +1,9 @@
 import os
 from jinja2 import Environment, FileSystemLoader
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
-def build_html(articles, output_file="public/index.html"):
+def build_html(articles, editorial="", output_file="public/index.html"):
     template_dir = os.path.join(os.path.dirname(__file__), "templates")
     env = Environment(loader=FileSystemLoader(template_dir))
     
@@ -14,7 +15,8 @@ def build_html(articles, output_file="public/index.html"):
     html_content = template.render(
         articles=articles,
         sources=unique_sources,
-        current_time=datetime.now().strftime("%d/%m/%Y %H:%M")
+        editorial=editorial,
+        current_time=datetime.now(ZoneInfo("Europe/Madrid")).strftime("%d/%m/%Y %H:%M")
     )
     
     # Crear la carpeta de destino si no existe (importante para github pages)

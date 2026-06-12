@@ -36,6 +36,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 🗞️ Descargar noticias y generar HTML
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python rss_main.py
 
       - name: ⚙️ Configurar GitHub Pages
