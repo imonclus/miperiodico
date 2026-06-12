@@ -3,7 +3,9 @@ from datetime import datetime
 import time
 import concurrent.futures
 
-def parse_single_feed(url, max_entries):
+def parse_single_feed(feed_info, max_entries):
+    url = feed_info["url"]
+    category = feed_info.get("category", "General")
     print(f"Descargando RSS: {url}")
     try:
         feed = feedparser.parse(url)
@@ -33,6 +35,7 @@ def parse_single_feed(url, max_entries):
             
         parsed_news.append({
             'source': feed_title,
+            'category': category,
             'title': entry.get('title', 'Sin título'),
             'link': entry.get('link', '#'),
             'summary': entry.get('summary', ''),
@@ -41,18 +44,18 @@ def parse_single_feed(url, max_entries):
         })
     return parsed_news
 
-def fetch_feeds(feed_urls, max_entries=10):
+def fetch_feeds(feeds, max_entries=10):
     all_news = []
     
     # Usar ThreadPoolExecutor para descargar múltiples RSS en paralelo
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        futures = {executor.submit(parse_single_feed, url, max_entries): url for url in feed_urls}
+        futures = {executor.submit(parse_single_feed, feed_info, max_entries): feed_info for feed_info in feeds}
         for future in concurrent.futures.as_completed(futures):
             try:
                 news = future.result()
                 all_news.extend(news)
             except Exception as exc:
-                url = futures[future]
+                url = futures[future]["url"]
                 print(f"Error procesando {url}: {exc}")
                 
     return all_news

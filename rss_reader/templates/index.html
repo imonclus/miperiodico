@@ -171,31 +171,31 @@
 <body>
     <header>
         <h1>🗞️ Tu Periódico Personal</h1>
-        <p>Actualizado el: {{ current_time }}</p>
+        <p>Actualizado el: {{ last_updated }}</p>
         <a href="https://github.com/imonclus/miperiodico/actions/workflows/deploy.yml" target="_blank" class="update-link" title="Ir a GitHub para forzar una actualización manual">
             🔄 Actualizar ahora
         </a>
     </header>
 
-    {% if editorial %}
     <div class="editorial-container">
-        <div class="editorial-box">
-            <h3 style="margin-top:0; color: var(--primary);">✨ Editorial del Día</h3>
-            <p style="margin-bottom:0; font-size: 1.05rem;">{{ editorial }}</p>
+        {% for category, text in editorials.items() %}
+        <div class="editorial-box" data-editorial-category="{{ category }}" style="display: none;">
+            <h3 style="margin-top:0; color: var(--primary);">✨ Resumen IA: {{ category }}</h3>
+            <p style="margin-bottom:0; font-size: 1.05rem;">{{ text }}</p>
         </div>
+        {% endfor %}
     </div>
-    {% endif %}
     
     <nav class="filters">
-        <button class="filter-btn active" onclick="filterSource('all', this)">Todas las noticias</button>
-        {% for source in sources %}
-        <button class="filter-btn" onclick="filterSource('{{ source }}', this)">{{ source }}</button>
+        <button class="filter-btn active" onclick="filterCategory('all', this)">Todas las noticias</button>
+        {% for cat in categories %}
+        <button class="filter-btn" onclick="filterCategory('{{ cat }}', this)">{{ cat }}</button>
         {% endfor %}
     </nav>
 
     <div class="container">
         {% for article in articles %}
-        <article class="card" data-source="{{ article.source }}">
+        <article class="card" data-category="{{ article.category }}">
             {% if article.image %}
             <img src="{{ article.image }}" alt="Imagen de noticia" class="card-img" loading="lazy">
             {% endif %}
@@ -210,18 +210,28 @@
     </div>
 
     <script>
-        function filterSource(source, btnElement) {
+        function filterCategory(category, btnElement) {
             // Actualizar el estado visual de los botones
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
             
-            // Mostrar u ocultar las tarjetas según su data-source
+            // Mostrar u ocultar las tarjetas según su data-category
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
-                if (source === 'all' || card.getAttribute('data-source') === source) {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
+                }
+            });
+            
+            // Mostrar el resumen de IA correspondiente a la categoría
+            const editorials = document.querySelectorAll('.editorial-box');
+            editorials.forEach(box => {
+                if (category !== 'all' && box.getAttribute('data-editorial-category') === category) {
+                    box.style.display = 'block';
+                } else {
+                    box.style.display = 'none';
                 }
             });
         }
