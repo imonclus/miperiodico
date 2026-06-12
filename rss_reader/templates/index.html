@@ -231,7 +231,9 @@
         {% for article in articles %}
         <article class="card" data-category="{{ article.category }}" data-source="{{ article.source }}">
             {% if article.image %}
-            <img src="{{ article.image }}" alt="Imagen de noticia" class="card-img" loading="lazy">
+            <img src="{{ article.image }}" alt="Imagen de noticia" class="card-img" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80';">
+            {% else %}
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80" alt="Imagen genérica" class="card-img" loading="lazy">
             {% endif %}
             <div class="card-content">
                 <div class="source">{{ article.source }}</div>
