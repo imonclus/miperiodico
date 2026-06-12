@@ -38,8 +38,8 @@ def build_html(articles, editorials_by_category=None, output_file="public/index.
             featured_by_cat[cat] = []
             sources_seen_in_cat[cat] = set()
             
-        # Máximo de 5 noticias por categoría
-        if len(featured_by_cat[cat]) >= 5:
+        # Máximo de 6 noticias por categoría para que visualmente cuadre en la cuadrícula (ej. 2 filas de 3)
+        if len(featured_by_cat[cat]) >= 6:
             continue
             
         # Añadir solo si es la primera noticia que vemos de este periódico en esta categoría
