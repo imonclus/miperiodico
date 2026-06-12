@@ -139,6 +139,7 @@
             padding-bottom: 4rem;
         }
         .card {
+            position: relative;
             background-color: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
@@ -147,6 +148,27 @@
             display: flex;
             flex-direction: column;
             border: 1px solid var(--border);
+        }
+        .save-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background-color 0.3s;
+            z-index: 10;
+        }
+        .save-btn:hover {
+            transform: scale(1.1);
         }
         .card:hover {
             transform: translateY(-4px);
@@ -209,6 +231,7 @@
 <body>
     {% macro render_card(article) %}
     <article class="card" data-category="{{ article.category }}" data-source="{{ article.source }}">
+        <button class="save-btn" onclick="saveArticle(this)" data-title="{{ article.title | e }}" data-source="{{ article.source | e }}" data-link="{{ article.link }}" title="Guardar noticia en Sheets">🔖</button>
         {% if article.image %}
         <img src="{{ article.image }}" alt="Imagen de noticia" class="card-img" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80';">
         {% else %}
@@ -383,6 +406,54 @@
                         box.style.display = 'none';
                     }
                 }
+            });
+        }
+        
+        function saveArticle(btn) {
+            const title = btn.getAttribute('data-title');
+            const source = btn.getAttribute('data-source');
+            const link = btn.getAttribute('data-link');
+            
+            // Estado de carga
+            btn.innerHTML = '⏳';
+            btn.style.pointerEvents = 'none';
+            
+            const data = {
+                title: title,
+                source: source,
+                link: link
+            };
+            
+            // Petición a tu Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycbykHza8JiNXF1OQ1u9CgOoj5xjyiIsivYQKIwK8KcgK6B4TV59pGF5ccbouBNHzBBsx6A/exec', {
+                method: 'POST',
+                headers: {
+                    // Usamos text/plain para evitar bloqueos CORS por preflight
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if(result.status === 'success') {
+                    btn.innerHTML = '⭐';
+                    btn.style.background = 'gold';
+                    btn.title = '¡Guardado en Sheets!';
+                } else {
+                    btn.innerHTML = '❌';
+                    btn.title = 'Error del servidor';
+                    btn.style.pointerEvents = 'auto'; 
+                    console.error('Error de Apps Script:', result);
+                }
+            })
+            .catch(error => {
+                // Hay navegadores que pueden bloquear CORS si Apps Script no devuelve headers adecuados,
+                // pero si se ha guardado en el Sheet podemos considerarlo éxito a nivel visual.
+                // En este caso lo gestionaremos como error visual para asegurar que funciona.
+                btn.innerHTML = '❌';
+                btn.title = 'Error de conexión';
+                btn.style.pointerEvents = 'auto';
+                console.error('Fetch error:', error);
             });
         }
     </script>
