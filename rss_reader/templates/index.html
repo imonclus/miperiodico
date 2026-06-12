@@ -88,6 +88,29 @@
             color: white;
             transform: translateY(-2px);
         }
+        .sub-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+        .sub-filter-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+        .sub-filter-btn:hover, .sub-filter-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
         .editorial-container {
             max-width: 800px;
             margin: 0 auto 2rem auto;
@@ -192,10 +215,21 @@
         <button class="filter-btn" onclick="filterCategory('{{ cat }}', this)">{{ cat }}</button>
         {% endfor %}
     </nav>
+    
+    <div id="sub-filters-container">
+        {% for cat, sources in sources_by_category.items() %}
+        <nav class="sub-filters" data-subcategory="{{ cat }}" style="display: none;">
+            <button class="sub-filter-btn active" onclick="filterSource('all', '{{ cat }}', this)">Todas las fuentes de {{ cat }}</button>
+            {% for source in sources %}
+            <button class="sub-filter-btn" onclick="filterSource('{{ source }}', '{{ cat }}', this)">{{ source }}</button>
+            {% endfor %}
+        </nav>
+        {% endfor %}
+    </div>
 
     <div class="container">
         {% for article in articles %}
-        <article class="card" data-category="{{ article.category }}">
+        <article class="card" data-category="{{ article.category }}" data-source="{{ article.source }}">
             {% if article.image %}
             <img src="{{ article.image }}" alt="Imagen de noticia" class="card-img" loading="lazy">
             {% endif %}
@@ -211,9 +245,22 @@
 
     <script>
         function filterCategory(category, btnElement) {
-            // Actualizar el estado visual de los botones
+            // Actualizar el estado visual de los botones de categoria
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
+            
+            // Mostrar los subfiltros correctos
+            document.querySelectorAll('.sub-filters').forEach(nav => {
+                if (nav.getAttribute('data-subcategory') === category) {
+                    nav.style.display = 'flex';
+                    // Resetear el subfiltro activo al primero ("Todas las fuentes")
+                    const subBtns = nav.querySelectorAll('.sub-filter-btn');
+                    subBtns.forEach(b => b.classList.remove('active'));
+                    if(subBtns.length > 0) subBtns[0].classList.add('active');
+                } else {
+                    nav.style.display = 'none';
+                }
+            });
             
             // Mostrar u ocultar las tarjetas según su data-category
             const cards = document.querySelectorAll('.card');
@@ -232,6 +279,25 @@
                     box.style.display = 'block';
                 } else {
                     box.style.display = 'none';
+                }
+            });
+        }
+        
+        function filterSource(source, category, btnElement) {
+            // Actualizar estado visual de subbotones
+            const parentNav = btnElement.closest('.sub-filters');
+            parentNav.querySelectorAll('.sub-filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            
+            // Filtrar las tarjetas que pertenecen a la categoria actual
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (card.getAttribute('data-category') === category) {
+                    if (source === 'all' || card.getAttribute('data-source') === source) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 }
             });
         }

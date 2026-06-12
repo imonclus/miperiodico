@@ -16,13 +16,22 @@ def build_html(articles, editorials_by_category=None, output_file="public/index.
     template = env.get_template("index.html")
     
     # Extraer las fuentes únicas de los artículos para crear los botones de filtro
-    unique_sources = sorted(list(set(article['source'] for article in articles)))
+    sources_by_category = {}
+    for article in articles:
+        cat = article.get('category', 'General')
+        src = article.get('source', 'Desconocido')
+        if cat not in sources_by_category:
+            sources_by_category[cat] = set()
+        sources_by_category[cat].add(src)
+        
+    for cat in sources_by_category:
+        sources_by_category[cat] = sorted(list(sources_by_category[cat]))
     
     # Render template
     html_content = template.render(
         articles=articles,
         categories=categories,
-        sources=unique_sources,
+        sources_by_category=sources_by_category,
         editorials=editorials_by_category or {},
         last_updated=datetime.now(ZoneInfo("Europe/Madrid")).strftime("%d/%m/%Y %H:%M")
     )
