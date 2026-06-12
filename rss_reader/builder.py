@@ -27,14 +27,25 @@ def build_html(articles, editorials_by_category=None, output_file="public/index.
     for cat in sources_by_category:
         sources_by_category[cat] = sorted(list(sources_by_category[cat]))
         
-    # Extraer las 3 primeras noticias de cada categoría para "Destacadas"
+    # Extraer hasta 5 noticias de cada categoría para "Destacadas", asegurando fuentes diferentes
     featured_by_cat = {}
+    sources_seen_in_cat = {}
     for article in articles:
         cat = article.get('category', 'General')
+        src = article.get('source', 'Desconocido')
+        
         if cat not in featured_by_cat:
             featured_by_cat[cat] = []
-        if len(featured_by_cat[cat]) < 3:
+            sources_seen_in_cat[cat] = set()
+            
+        # Máximo de 5 noticias por categoría
+        if len(featured_by_cat[cat]) >= 5:
+            continue
+            
+        # Añadir solo si es la primera noticia que vemos de este periódico en esta categoría
+        if src not in sources_seen_in_cat[cat]:
             featured_by_cat[cat].append(article)
+            sources_seen_in_cat[cat].add(src)
     
     # Render template
     html_content = template.render(
