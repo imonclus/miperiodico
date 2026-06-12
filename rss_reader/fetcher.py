@@ -2,6 +2,10 @@ import feedparser
 from datetime import datetime
 import time
 import concurrent.futures
+import socket
+
+# Timeout global para evitar bloqueos si una web no responde
+socket.setdefaulttimeout(10)
 
 def parse_single_feed(feed_info, max_entries):
     url = feed_info["url"]

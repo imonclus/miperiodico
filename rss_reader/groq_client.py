@@ -13,6 +13,7 @@ Eres un redactor experto especializado en {category}. Tienes los siguientes titu
 
 Redacta un único párrafo breve (máximo 3 frases) en español, resumiendo los temas principales. No hagas listas, solo el párrafo fluido.
 """
+    print(f"Empezando a generar resumen IA para: {category}...")
     try:
         completion = client.chat.completions.create(
             model="llama-3.1-8b-instant",
@@ -23,9 +24,10 @@ Redacta un único párrafo breve (máximo 3 frases) en español, resumiendo los 
             temperature=0.7,
             max_tokens=150,
         )
+        print(f"✅ Resumen generado con éxito para: {category}")
         return category, completion.choices[0].message.content.strip()
     except Exception as e:
-        print(f"Error generating editorial for {category}: {e}")
+        print(f"❌ Error generating editorial for {category}: {e}")
         return category, ""
 
 def generate_category_editorials(articles):
@@ -37,7 +39,7 @@ def generate_category_editorials(articles):
         print("Warning: GROQ_API_KEY not found. Skipping editorial generation.")
         return {}
         
-    client = Groq(api_key=api_key)
+    client = Groq(api_key=api_key, max_retries=1)
     
     # Agrupar articulos por categoria
     articles_by_cat = {}
@@ -49,8 +51,9 @@ def generate_category_editorials(articles):
         
     editorials = {}
     
-    # Generar en paralelo
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    # Generar en paralelo (limitado a 2 para no saturar la API gratuita)
+    print(f"Enviando {len(articles_by_cat)} peticiones a Groq...")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         futures = []
         for cat, cat_articles in articles_by_cat.items():
             if cat_articles:
