@@ -194,9 +194,35 @@
             opacity: 0.6;
             margin-top: auto;
         }
+        .category-header {
+            width: 100%;
+            grid-column: 1 / -1;
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-top: 1rem;
+            margin-bottom: -1rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
+    {% macro render_card(article) %}
+    <article class="card" data-category="{{ article.category }}" data-source="{{ article.source }}">
+        {% if article.image %}
+        <img src="{{ article.image }}" alt="Imagen de noticia" class="card-img" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80';">
+        {% else %}
+        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80" alt="Imagen genérica" class="card-img" loading="lazy">
+        {% endif %}
+        <div class="card-content">
+            <div class="source">{{ article.source }}</div>
+            <h2 class="title"><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h2>
+            <div class="summary">{{ article.summary | striptags | truncate(200) }}</div>
+            <div class="footer">{{ article.date }}</div>
+        </div>
+    </article>
+    {% endmacro %}
+
     <header>
         <h1>🗞️ Tu Periódico Personal</h1>
         <p>Actualizado el: {{ last_updated }}</p>
@@ -216,7 +242,7 @@
     </div>
     
     <nav class="filters">
-        <button class="filter-btn active" onclick="filterCategory('all', this)">Todas las noticias</button>
+        <button class="filter-btn active" onclick="filterCategory('destacadas', this)">🌟 Destacadas</button>
         {% for cat in categories %}
         <button class="filter-btn" onclick="filterCategory('{{ cat }}', this)">{{ cat }}</button>
         {% endfor %}
@@ -233,26 +259,27 @@
         {% endfor %}
     </div>
 
-    <div class="container">
-        {% for article in articles %}
-        <article class="card" data-category="{{ article.category }}" data-source="{{ article.source }}">
-            {% if article.image %}
-            <img src="{{ article.image }}" alt="Imagen de noticia" class="card-img" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80';">
-            {% else %}
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80" alt="Imagen genérica" class="card-img" loading="lazy">
-            {% endif %}
-            <div class="card-content">
-                <div class="source">{{ article.source }}</div>
-                <h2 class="title"><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h2>
-                <div class="summary">{{ article.summary | striptags | truncate(200) }}</div>
-                <div class="footer">{{ article.date }}</div>
-            </div>
-        </article>
-        {% endfor %}
+    <div id="view-destacadas">
+        <div class="container">
+            {% for cat, cat_articles in featured_by_cat.items() %}
+            <h2 class="category-header">{{ cat }}</h2>
+            {% for article in cat_articles %}
+            {{ render_card(article) }}
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="view-categorias" style="display: none;">
+        <div class="container">
+            {% for article in articles %}
+            {{ render_card(article) }}
+            {% endfor %}
+        </div>
     </div>
 
     <script>
-        let currentCategory = 'all';
+        let currentCategory = 'destacadas';
         let currentSource = 'all';
 
         function filterCategory(category, btnElement) {
@@ -298,7 +325,23 @@
         
         function applyFilters() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
+            
+            // Si hay búsqueda, forzamos vista categorías y ocultamos destacadas temporamente
+            if (searchTerm.length > 0) {
+                document.getElementById('view-destacadas').style.display = 'none';
+                document.getElementById('view-categorias').style.display = 'block';
+            } else {
+                // Restauramos la vista según la categoría actual
+                if (currentCategory === 'destacadas') {
+                    document.getElementById('view-destacadas').style.display = 'block';
+                    document.getElementById('view-categorias').style.display = 'none';
+                } else {
+                    document.getElementById('view-destacadas').style.display = 'none';
+                    document.getElementById('view-categorias').style.display = 'block';
+                }
+            }
+            
+            const cards = document.querySelectorAll('#view-categorias .card');
             
             cards.forEach(card => {
                 const title = card.querySelector('.title').textContent.toLowerCase();
@@ -317,7 +360,7 @@
                     const cardCat = card.getAttribute('data-category');
                     const cardSource = card.getAttribute('data-source');
                     
-                    const matchesCategory = (currentCategory === 'all' || cardCat === currentCategory);
+                    const matchesCategory = (currentCategory === 'destacadas' || cardCat === currentCategory);
                     const matchesSource = (currentSource === 'all' || cardSource === currentSource);
                     
                     if (matchesCategory && matchesSource) {
@@ -328,13 +371,13 @@
                 }
             });
             
-            // Ocultar resúmenes IA durante la búsqueda, o mostrarlos según categoría si no hay búsqueda
+            // Ocultar resúmenes IA durante la búsqueda o en destacadas, o mostrarlos según categoría si no hay búsqueda
             const editorials = document.querySelectorAll('.editorial-box');
             editorials.forEach(box => {
-                if (searchTerm.length > 0) {
+                if (searchTerm.length > 0 || currentCategory === 'destacadas') {
                     box.style.display = 'none';
                 } else {
-                    if (currentCategory !== 'all' && box.getAttribute('data-editorial-category') === currentCategory) {
+                    if (box.getAttribute('data-editorial-category') === currentCategory) {
                         box.style.display = 'block';
                     } else {
                         box.style.display = 'none';

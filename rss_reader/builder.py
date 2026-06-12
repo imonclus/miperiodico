@@ -26,12 +26,22 @@ def build_html(articles, editorials_by_category=None, output_file="public/index.
         
     for cat in sources_by_category:
         sources_by_category[cat] = sorted(list(sources_by_category[cat]))
+        
+    # Extraer las 3 primeras noticias de cada categoría para "Destacadas"
+    featured_by_cat = {}
+    for article in articles:
+        cat = article.get('category', 'General')
+        if cat not in featured_by_cat:
+            featured_by_cat[cat] = []
+        if len(featured_by_cat[cat]) < 3:
+            featured_by_cat[cat].append(article)
     
     # Render template
     html_content = template.render(
         articles=articles,
         categories=categories,
         sources_by_category=sources_by_category,
+        featured_by_cat=featured_by_cat,
         editorials=editorials_by_category or {},
         last_updated=datetime.now(ZoneInfo("Europe/Madrid")).strftime("%d/%m/%Y %H:%M")
     )
