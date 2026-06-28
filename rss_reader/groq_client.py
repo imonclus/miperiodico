@@ -16,7 +16,7 @@ Redacta un único párrafo breve (máximo 3 frases) en español, resumiendo los 
     print(f"Empezando a generar resumen IA para: {category}...")
     try:
         completion = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="gpt-oss-20b",
             messages=[
                 {"role": "system", "content": f"Eres un periodista experto en {category}."},
                 {"role": "user", "content": prompt}
