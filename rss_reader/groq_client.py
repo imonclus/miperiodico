@@ -22,13 +22,15 @@ Redacta un único párrafo breve (máximo 3 frases) en español, resumiendo los 
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
-            max_tokens=1024,
+            max_tokens=450,
         )
         print(f"✅ Resumen generado con éxito para: {category}")
         return category, completion.choices[0].message.content.strip()
     except Exception as e:
         print(f"❌ Error generating editorial for {category}: {e}")
         return category, f"⚠️ No se pudo generar el resumen. Error de IA: {e}"
+
+import time
 
 def generate_category_editorials(articles):
     """
@@ -39,7 +41,7 @@ def generate_category_editorials(articles):
         print("Warning: GROQ_API_KEY not found. Skipping editorial generation.")
         return {}
         
-    client = Groq(api_key=api_key, max_retries=1)
+    client = Groq(api_key=api_key, max_retries=3)
     
     # Agrupar articulos por categoria
     articles_by_cat = {}
@@ -51,17 +53,14 @@ def generate_category_editorials(articles):
         
     editorials = {}
     
-    # Generar en paralelo (limitado a 2 para no saturar la API gratuita)
-    print(f"Enviando {len(articles_by_cat)} peticiones a Groq...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-        futures = []
-        for cat, cat_articles in articles_by_cat.items():
-            if cat_articles:
-                futures.append(executor.submit(generate_single_editorial, client, cat, cat_articles))
-                
-        for future in concurrent.futures.as_completed(futures):
-            cat, text = future.result()
+    # Generar secuencialmente para no saturar el límite de TPM (Tokens por minuto)
+    print(f"Enviando {len(articles_by_cat)} peticiones a Groq de forma secuencial...")
+    for cat, cat_articles in articles_by_cat.items():
+        if cat_articles:
+            cat, text = generate_single_editorial(client, cat, cat_articles)
             if text:
                 editorials[cat] = text
+            time.sleep(2) # Pausa de 2 segundos entre llamadas para reponer tokens
                 
     return editorials
+
