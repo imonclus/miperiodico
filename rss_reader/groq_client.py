@@ -16,13 +16,13 @@ Redacta un único párrafo breve (máximo 3 frases) en español, resumiendo los 
     print(f"Empezando a generar resumen IA para: {category}...")
     try:
         completion = client.chat.completions.create(
-            model="openai/gpt-oss-20b",
+            model="openai/gpt-oss-120b",
             messages=[
                 {"role": "system", "content": f"Eres un periodista experto en {category}."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
-            max_tokens=350,
+            max_tokens=1024,
         )
         print(f"✅ Resumen generado con éxito para: {category}")
         return category, completion.choices[0].message.content.strip()
