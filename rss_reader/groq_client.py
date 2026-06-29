@@ -28,7 +28,7 @@ Redacta un único párrafo breve (máximo 3 frases) en español, resumiendo los 
         return category, completion.choices[0].message.content.strip()
     except Exception as e:
         print(f"❌ Error generating editorial for {category}: {e}")
-        return category, ""
+        return category, f"⚠️ No se pudo generar el resumen. Error de IA: {e}"
 
 def generate_category_editorials(articles):
     """
